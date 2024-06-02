@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <!-- Grab title from the page data and dump it here -->
+  <title>InterestingBits[0] | ヽ(｀Д´)⊃━☆ﾟ. * ･ ｡ﾟ Oransje Magician</title>
+</head>
+<body>
+  <nav>
+    <a href="/">/preludio</a>
+    <a href=/ordinary-life id="ordinary-life">/日常</a>
+    <a href=/helvetica-standard id="helvetica-standard">/HeLvEtIcA StAnDaRd</a>
+    <a href=/opera id="opera">/opera</a>
+    <a href=/correspondence id="correspondence">/correspondence</a>
+  </nav>
+  <hr/>
+  <!-- Grab the content from the page data, dump it here, and mark it as safe -->
+  <!-- Safe docs: https://mozilla.github.io/nunjucks/templating.html#safe -->
+  <h1>Interesting bits part 0</h1>
+<p>A series about some problems and writeups at the internet that I take time to solve, nothing superflous!</p>
+<p>Today we gonna see a little exercise with ascii and a phonebook application in... HASKELL.</p>
+<h2>Ascii uppercase prompt</h2>
+<p>This is simple, the program must output everything in uppercase and shows a generic message if no input is given.</p>
+<p>First we assume that every ascii code in lowercase are the same integer value for the same letter in uppercase. So we can define the algorithm as:</p>
+<pre><code class="language-hs">sub32Ord :: Char -&gt; Char
+sub32Ord c
+  | c &gt;= 'a' &amp;&amp; c &lt;= 'z' = chr $ ord c - 32
+  | otherwise            = c
+</code></pre>
+<p>Where to obtain an uppercase letter, we just subtract 5b of the current char.</p>
+<p>After we apply some declarative programming magic!</p>
+<pre><code class="language-hs">processArg :: [String] -&gt; String
+processArg arg
+  | null arg   = &quot;IMAGINE ALL THE PEOPLE TYPING IN UPPERCASE...&quot;
+  | otherwise  = toUpper $ foldr (++) &quot;&quot; arg
+
+toUpper :: String -&gt; String
+toUpper = map sub32Ord
+</code></pre>
+<p>This functions reduces with a concatenation starting with empty value as acumulator and the args list of strings, then we apply map on the final strings, using the former subtraction algorithm and it's done.</p>
+<p>Check the code <a href="hhttps://github.com/oransje/interesting-bits/blob/main/00/upper.hs">here</a></p>
+
+  <hr/> 
+  <footer style="text-align: center;">
+    ﾟ. * Made by myself with 11ty and coffee * ･ ｡ﾟ
+  </footer>
+</body>
+</html>

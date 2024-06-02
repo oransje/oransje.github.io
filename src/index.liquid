@@ -1,0 +1,33 @@
+---
+layout: layout.njk
+title: Preludio
+---
+<h1>Selamat Pagi! ヽ(｀Д´)⊃━☆ﾟ. * ･ ｡ﾟ Oransje Wizard place!</h1>
+
+<p>Hello! I am a computer science life-learning student. who likes programming, music, magic and powerlifting ᕦ(ò_óˇ)ᕤ.</p>
+
+<p>Here I will write about the forementioned subjects in the section 日常(yeah, the japanese character above referencing the best manga/anime on the world).</p>
+
+<p>In the helvetica-standard section the paradise of nonsense!</p>
+<p>You can also see my projects on the opera section and contact info on the correspondence section.</p>
+
+<cite>
+  “Information is not knowledge.
+Knowledge is not wisdom.
+Wisdom is not truth.
+Truth is not beauty.
+Beauty is not love.
+Love is not music.
+Music is THE BEST.”
+</cite><p>
+― Frank Zappa
+</p>
+
+<h3>Latest writings</h2>
+
+{% assign posts = collections.ordinaryLife | reverse %}
+{% for post in posts limit:5 %}
+    <p>
+    <a href="{{ post.url }}">{{ post.data.title }}</a> <i>(written {{ post.date | date: "%b %d, %Y"}})</i>
+    </p>
+{% endfor %}
