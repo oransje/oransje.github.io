@@ -2,7 +2,7 @@
 layout: layout.njk
 title: My linux journey
 tags: linux
-date: 2024-03-10
+date: 2024-10-05
 ---
 # My Linux Journey
 
