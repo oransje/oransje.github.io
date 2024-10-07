@@ -55,7 +55,7 @@ Here we have a construtor of Translate, that repositions the cursor and then fol
 The result is a very nice raw game title with some weight on text effect:
 ![Asteroidinhos game title](/img/asteroids-game-title.png)
 
-If you do not understand haskell gloss, no worries! I made the exactly same coding on js(I bet everyone on the web understands js):
+If you do not understand haskell gloss, no worries! I made the exactly same idea on js(I bet everyone on the web understands js):
 
 ```js
 const canvas = document.getElementById("canvas");
