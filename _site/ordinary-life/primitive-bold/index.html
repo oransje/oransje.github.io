@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <!-- Grab title from the page data and dump it here -->
+  <title>Primitive bold | ヽ(｀Д´)⊃━☆ﾟ. * ･ ｡ﾟ Oransje Magician</title>
+</head>
+<body>
+  <nav>
+    <a href="/">/preludio</a>
+    <a href=/ordinary-life id="ordinary-life">/日常</a>
+    <a href=/helvetica-standard id="helvetica-standard">/HeLvEtIcA StAnDaRd</a>
+    <a href=/opera id="opera">/opera</a>
+    <a href=/correspondence id="correspondence">/correspondence</a>
+  </nav>
+  <hr/>
+  <!-- Grab the content from the page data, dump it here, and mark it as safe -->
+  <!-- Safe docs: https://mozilla.github.io/nunjucks/templating.html#safe -->
+  <h1>Primitive Bold</h1>
+<p>As I am working on the project for asteroids clone I wanted to do something like a bold text without using any font type, like the mayans and aztecs of programming.</p>
+<p>I will share an interesting trick I thought while dealing with this limitation of my project.</p>
+<h2>The trick</h2>
+<p>You just draw the text abd interpolates the same text with the offset, this will make the text redrawings on the offset of the original position giving a bold illusion.</p>
+<p>As for example, with a design tool we can first illustrate the original text:</p>
+<p><img src="/img/text-original.png" alt="TEXT written on a image without any trick applied"></p>
+<p>And then redraw to the right with one pixel offset:</p>
+<p><img src="/img/text-right.png" alt="TEXT redrawn on right position"></p>
+<p>Redrawing on thedown with one pixel offset:</p>
+<p><img src="/img/text-up.png" alt="TEXT redrawn on up position"></p>
+<p>Redrawing on the up with one pixel offset:</p>
+<p><img src="/img/text-up.png" alt="TEXT redrawn on down position"></p>
+<p>And so on, we obtain a bold from any font stroke, as my graphics engine only has one font type to render, I could easily break this limitation with this nice trick.</p>
+<h2>Talk is cheap, show me the code!</h2>
+<p>First I will share the original code using gloss library.</p>
+<pre><code class="language-hs">gameTitle
+    = pictures 
+        [ Translate (-350 + x) (50 +y) 
+        $ Scale 0.3 0.3 
+        $ Color cyan 
+        $ Text &quot;A S T E R O I D I N H O S&quot; | (x, y) &lt;- interpolations
+        ]
+    where
+        interpolations = [(0, 0), (1, 0), (0, 1), (1, 1)]
+</code></pre>
+<p>The pictures instruction, just groups an array of pictures to the same picture, which is the shape to be drawn on the gloss library.</p>
+<p>Here we have a construtor of Translate, that repositions the cursor and then following constructors are just the text drawing picture itself. The array is built of four texts interpolated, resulting in a bold text effect.</p>
+<p>The result is a very nice raw game title with some weight on text effect:
+<img src="/img/asteroids-game-title.png" alt="Asteroidinhos game title"></p>
+<p>If you do not understand haskell gloss, no worries! I made the exactly same coding on js(I bet everyone on the web understands js):</p>
+<pre><code class="language-js">const canvas = document.getElementById(&quot;canvas&quot;);
+const ctx = canvas.getContext(&quot;2d&quot;);
+
+const interpolations = [
+  { x: 0, y: 0 },
+  { x: 1, y: 0 },
+  { x: 0, y: 1 },
+  { x: 1, y: 1 }
+];
+
+ctx.font = '60px Arial';
+ctx.fillStyle = 'violet';
+
+interpolations.forEach(({ x, y }) =&gt; {
+  ctx.save();
+  ctx.translate(10 + x, 50 + y);
+  ctx.scale(0.3, 0.3);
+  ctx.fillText('PRIMITIVE BOLD', 0, 0);
+  ctx.restore();
+});
+</code></pre>
+<p>And the result:</p>
+<p><img src="/img/primitive-bold-js.png" alt="Primitive bold technique done in js with green border, red background and violet text"></p>
+<p>You can check the full code on this <a href="https://codepen.io/AmdChaos/pen/zYgKYeQ">codepen</a> I prepared specially for this article.</p>
+<h2>The end</h2>
+<p>I hope that you had fun knowin this trick when dealing with small fonttypes sets and the need of a bold stroke. Special thanks to mdn and codepen that helped me on doing the js version to share the concept with you. Special thanks also to the canvas tool that make possible a non-designer explains the ideia without much work!</p>
+
+  <hr/> 
+  <footer style="text-align: center;">
+    ﾟ. * Made by myself with 11ty and coffee * ･ ｡ﾟ
+  </footer>
+</body>
+</html>

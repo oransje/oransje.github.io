@@ -15,8 +15,8 @@ module.exports = function(eleventyConfig) {
     return collectionAPI.getFilteredByGlob("./src/opera/*.md");
   });
 
-
   eleventyConfig.addPassthroughCopy("src/styles.css");
+  eleventyConfig.addPassthroughCopy("src/img");
   return {
     dir: {
       input: "src",
