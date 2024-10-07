@@ -48,7 +48,7 @@ gameTitle
         interpolations = [(0, 0), (1, 0), (0, 1), (1, 1)]
 ```
 
-The pictures instruction, just groups an array of pictures to the same picture, which is the shape to be drawn on the gloss library.
+The pictures instruction just groups an array of pictures to the same picture, which is the shape to be drawn on the gloss library.
 
 Here we have a construtor of Translate, that repositions the cursor and then following constructors are just the text drawing picture itself. The array is built of four texts interpolated, resulting in a bold text effect. 
 
